@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Game/Black.mat.meta
 guid: b6a6d33d0088d824fb869dc9b3463371
+========
+guid: 2b53683c586ae5b49aa5093df43fb647
+>>>>>>>> 88e1860 (Added Home Planet):Assets/Materials/Planet.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000
