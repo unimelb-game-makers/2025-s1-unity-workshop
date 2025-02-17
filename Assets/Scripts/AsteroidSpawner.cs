@@ -1,0 +1,63 @@
+using UnityEngine;
+using Random = UnityEngine.Random;
+
+public class AsteroidSpawner : MonoBehaviour
+{
+    [SerializeField] private Transform target;
+    [SerializeField] private Vector2 speedRange;
+    [SerializeField] private Asteroid asteroidPrefab;
+    [SerializeField] private float timeBetweenSpawn;
+
+    private bool _spawning = false;
+    private float _time;
+    
+    private void Start()
+    {
+        StartSpawning();
+    }
+
+    private void Update()
+    {
+        if (!_spawning)
+            return;
+        if (_time >= timeBetweenSpawn)
+        {
+            Spawn();
+            _time = 0f;
+        }
+        _time += Time.deltaTime;
+    }
+
+    private void StartSpawning()
+    {
+        _spawning = true;
+    }
+
+    private Vector3 GetSpawnPoint()
+    {
+        float randomX = Random.Range(-transform.lossyScale.x/2, transform.lossyScale.x/2);
+        float randomY = Random.Range(-transform.lossyScale.y/2, transform.lossyScale.y/2);
+        float randomZ = Random.Range(-transform.lossyScale.z/2, transform.lossyScale.z/2);
+        return transform.position + new Vector3(randomX, randomY, randomZ);
+    }
+
+    private void Spawn()
+    {
+        // Instantiate the asteroid
+        Asteroid asteroid = Instantiate(asteroidPrefab);
+        
+        // Set a random spawn point based on the spawn area
+        asteroid.transform.position = GetSpawnPoint();
+        
+        // Set a random speed based on the direction to the target
+        Vector3 directionToTarget = (target.position - asteroid.transform.position).normalized;
+        Vector3 speed = directionToTarget * Random.Range(speedRange.x, speedRange.y);
+        asteroid.Init(speed);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireCube(transform.position, transform.lossyScale);
+    }
+}
