@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Game/Gold.mat.meta
 guid: b3202d1995c0e36428979e6a7f2886bc
+========
+guid: 2b53683c586ae5b49aa5093df43fb647
+>>>>>>>> 88e1860 (Added Home Planet):Assets/Materials/Planet.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Game.meta
 guid: c245499b807ed474e80647feeb77ed3a
+========
+guid: 7bb57ff10c5ed1242a4f54b243f53a6d
+>>>>>>>> 88e1860 (Added Home Planet):Assets/Materials.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
