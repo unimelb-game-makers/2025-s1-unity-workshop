@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Planet : MonoBehaviour
+public class Earth : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 5;
     private int _health;
@@ -13,11 +13,11 @@ public class Planet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent(out Asteroid asteroid))
+        if (collision.gameObject.CompareTag("Asteroid"))
         {
             // On collision with an asteroid, we want to reduce our health and destroy the asteroid
             ReduceHealth();
-            Destroy(asteroid.gameObject);
+            Destroy(collision.gameObject);
         }
     }
 
