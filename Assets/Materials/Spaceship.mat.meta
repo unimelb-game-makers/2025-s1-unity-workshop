@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Materials/Spaceship.mat.meta
+guid: 95ecdcde0c44ade4ab055948b0da0823
+========
+guid: 2b53683c586ae5b49aa5093df43fb647
+>>>>>>>> 88e1860 (Added Home Planet):Assets/Materials/Planet.mat.meta
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
