@@ -7,6 +7,9 @@ public class Earth : MonoBehaviour
     private int maxHealth = 5;
     private int health;
 
+    public static Action<int> OnHealthChanged;
+    public static Action OnDead;
+
     private void Start()
     {
         health = maxHealth;
@@ -26,10 +29,12 @@ public class Earth : MonoBehaviour
         // Reduce Health by 1
         health -= 1;
         
+        OnHealthChanged?.Invoke(health);
         // Die if our health reaches 0
         if (health <= 0)
         {
             Debug.Log("Game Over!");
+            OnDead?.Invoke();
             Destroy(gameObject);
         }
     }
