@@ -13,7 +13,7 @@ public class Planet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent(out Asteroid asteroid))
+        if (collision.gameObject.TryGetComponent(out GameObject asteroid))
         {
             // On collision with an asteroid, we want to reduce our health and destroy the asteroid
             ReduceHealth();
