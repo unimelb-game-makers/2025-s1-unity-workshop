@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private float maxSpeed = 150.0f;
 
     [SerializeField, Range(0,10)]
-    private float deccelerationDamping = 5;
+    private float brakingDamping = 3;
     [SerializeField, Range(0,10)]
     private float normalDamping = 1;
 
@@ -38,17 +38,25 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Get forward movment input axis (WS keys or up-down arrowkeys)
         Vector2 moveAxis = moveAction.ReadValue<Vector2>();
         float forwardInputAxis = moveAxis.y;
 
+        //Clamp movement speed
         if (forwardInputAxis > 0.0f && rb.linearVelocity.magnitude < maxSpeed)
         {
             rb.linearDamping =  normalDamping;
             rb.AddRelativeForce(acceleration * forwardInputAxis * Vector3.forward, ForceMode.Acceleration);
         }
+
+        //Brake
+        if (forwardInputAxis < 0.0f)
+        {
+            rb.linearDamping =  brakingDamping;
+        }
         else
         {
-            rb.linearDamping =  deccelerationDamping;
+            rb.linearDamping = normalDamping;
         }
 
         _velocity = rb.linearVelocity;
