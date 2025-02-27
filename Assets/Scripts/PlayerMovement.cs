@@ -13,13 +13,18 @@ public class PlayerMovement : MonoBehaviour
     private float brakingDamping = 3;
     [SerializeField, Range(0, 10)]
     private float normalDamping = 1;
+    [SerializeField,Range(0,10)]
+    private float angularDamping = 2;
+
     [SerializeField, Range(0, 1)]
-    private float mouseSensitivity = 0.2f;
+    private float mouseSensitivity = 0.1f;
+    [SerializeField]
+    private float mouseClamp = 5;
 
     [DrawVector]
     private Vector3 _velocity;
-    [SerializeField, DrawVector]
-    private Vector3 mouseAxis;
+    [SerializeField, DrawVector(0,0,1)]
+    private Vector3 mouseDeltaAxis;
 
     private InputAction moveAction;
     private InputAction lookAction;
@@ -38,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         // Debug.Assert(rb != null);
 
         rb.linearDamping = normalDamping;
+        rb.angularDamping = angularDamping;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -48,7 +54,11 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-        mouseAxis = lookAction.ReadValue<Vector2>() * mouseSensitivity;
+        mouseDeltaAxis = lookAction.ReadValue<Vector2>() * mouseSensitivity;
+        mouseDeltaAxis = new Vector2(
+            Mathf.Clamp(mouseDeltaAxis.x,-mouseClamp,mouseClamp),
+            Mathf.Clamp(mouseDeltaAxis.y,-mouseClamp,mouseClamp)
+        );
 
         //Get forward movment input axis (WS keys or up-down arrowkeys)
         Vector2 moveAxis = moveAction.ReadValue<Vector2>();
@@ -72,7 +82,8 @@ public class PlayerMovement : MonoBehaviour
             rb.linearDamping = normalDamping;
         }
 
-        rb.MoveRotation(rb.rotation * Quaternion.Euler(-mouseAxis.y, mouseAxis.x, 0));
+        //Turn spaceship 
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(-mouseDeltaAxis.y, mouseDeltaAxis.x, 0));
 
         _velocity = rb.linearVelocity;
     }
