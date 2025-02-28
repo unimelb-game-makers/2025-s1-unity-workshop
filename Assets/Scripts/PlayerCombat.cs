@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,10 +7,21 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField]
     private GameObject bullet;
 
+    [SerializeField]
+    private Transform leftTurret;
+    [SerializeField]
+    private Transform rightTurret;
+
+    private Transform bulletSpawn;
+
     private InputAction attackAction;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Debug.Assert(leftTurret != null);
+        Debug.Assert(rightTurret != null);
+
+        bulletSpawn = leftTurret;
         attackAction = InputSystem.actions.FindAction("Attack");
     }
 
@@ -22,6 +32,8 @@ public class PlayerCombat : MonoBehaviour
 
         if (attackButtonPressed)
         {
+            Instantiate(bullet,bulletSpawn);
+            bulletSpawn = (bulletSpawn == leftTurret) ? rightTurret : leftTurret;
         }
     }
 }
