@@ -10,6 +10,9 @@ public class Earth : MonoBehaviour
     public static Action<int> OnHealthChanged;
     public static Action OnDead;
 
+    public static Action<int> OnHealthChanged;
+    public static Action OnDead;
+
     private void Start()
     {
         health = maxHealth;
