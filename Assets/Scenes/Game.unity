@@ -412,6 +412,7 @@ GameObject:
   - component: {fileID: 869116448}
   - component: {fileID: 869116447}
   - component: {fileID: 869116446}
+  - component: {fileID: 869116450}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -503,6 +504,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &869116450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869116445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f77292730c415474fbce7c89274a9f28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  overlay: {fileID: 1084940444}
 --- !u!1 &953362751
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,7 +600,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1084940446}
+      - m_Target: {fileID: 869116450}
         m_TargetAssemblyTypeName: GameOverUI, Assembly-CSharp
         m_MethodName: RestartButtonClicked
         m_Mode: 1
@@ -840,7 +854,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1084940445}
-  - component: {fileID: 1084940446}
   m_Layer: 5
   m_Name: Game Over Overlay
   m_TagString: Untagged
@@ -869,18 +882,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1084940446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1084940444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f77292730c415474fbce7c89274a9f28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1110924627 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8893780298565720934, guid: 405c7a804c49aea4fb210b3f61426b3c, type: 3}

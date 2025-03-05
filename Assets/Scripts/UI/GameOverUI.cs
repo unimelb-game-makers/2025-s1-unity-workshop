@@ -1,27 +1,29 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameOverUI : MonoBehaviour
 {
     [SerializeField]
     private GameObject overlay;
-    private void OnLevelWasLoaded()
-    {
-        Earth.OnDead += OnDead;
-        overlay.gameObject.SetActive(false);
-    }
 
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
-        overlay.gameObject.SetActive(false);
+        SceneManager.sceneLoaded += SceneChanged;
+        Earth.OnDead += OnDead;
     }
 
+    void SceneChanged(Scene scene, LoadSceneMode sceneMode)
+    {
+        overlay = GameObject.Find("Game Over Overlay");
+        overlay.SetActive(false);
+        Debug.Assert(overlay != null);
+        Debug.Log("Found GameObject!");
+    }
 
     private void OnDead()
     {
-        overlay.gameObject.SetActive(true); 
+        overlay.SetActive(true); 
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
