@@ -2,24 +2,42 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
-    private Rigidbody _rb;
+    private Rigidbody rb;
+
+    private int health;
+    [SerializeField]
+    private int maxHealth;
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     public void Init(Vector3 speed)
     {
-        _rb.linearVelocity = speed;
+        health = maxHealth;
+        rb.linearVelocity = speed;
     }
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (!collision.gameObject.CompareTag("Asteroid"))
+        if (collision.gameObject.CompareTag("Earth"))
         {
             Destroy(gameObject);
         }
+        else
+        {
+            TakeDamage(1);
+        }
         Debug.Log("Collided with " + collision.gameObject);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

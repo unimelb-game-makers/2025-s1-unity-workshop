@@ -14,4 +14,13 @@ public class Bullet : MonoBehaviour
         transform.Translate(Vector3.up * _velocity, Space.Self);
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Asteroid"))
+        {
+            other.GetComponent<Asteroid>().TakeDamage(1);
+            Destroy(gameObject);
+        }
+    }
+
 }
