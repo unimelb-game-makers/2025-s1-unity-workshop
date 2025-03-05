@@ -5,15 +5,13 @@ public class Asteroid : MonoBehaviour
     private Rigidbody rb;
 
     private int health;
-    [SerializeField]
-    private int maxHealth;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    public void Init(Vector3 speed)
+    public void Init(Vector3 speed, int maxHealth)
     {
         health = maxHealth;
         rb.linearVelocity = speed;

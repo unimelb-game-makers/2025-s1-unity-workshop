@@ -10,9 +10,6 @@ public class Earth : MonoBehaviour
     public static Action<int> OnHealthChanged;
     public static Action OnDead;
 
-    public static Action<int> OnHealthChanged;
-    public static Action OnDead;
-
     private void Start()
     {
         health = maxHealth;
@@ -38,7 +35,7 @@ public class Earth : MonoBehaviour
         {
             Debug.Log("Game Over!");
             OnDead?.Invoke();
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

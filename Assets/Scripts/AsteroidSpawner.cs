@@ -1,3 +1,4 @@
+using UnityEditor.MPE;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -7,6 +8,7 @@ public class AsteroidSpawner : MonoBehaviour
     [SerializeField] private Vector2 speedRange;
     [SerializeField] private Asteroid asteroidPrefab;
     [SerializeField] private float timeBetweenSpawn;
+    [SerializeField] private int asteroidHealth;
 
     private bool isSpawning = false;
     private float spawnTimer;
@@ -58,7 +60,7 @@ public class AsteroidSpawner : MonoBehaviour
         // Set a random speed based on the direction to the target
         Vector3 directionToTarget = (target.position - asteroid.transform.position).normalized;
         Vector3 speed = directionToTarget * Random.Range(speedRange.x, speedRange.y);
-        asteroid.Init(speed);
+        asteroid.Init(speed,asteroidHealth);
     }
 
     private void OnDrawGizmos()

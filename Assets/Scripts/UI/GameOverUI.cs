@@ -1,26 +1,36 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class GameOverUI : MonoBehaviour
 {
-    private void Awake()
+    [SerializeField]
+    private GameObject overlay;
+    private void OnLevelWasLoaded()
     {
         Earth.OnDead += OnDead;
+        overlay.gameObject.SetActive(false);
     }
 
     private void Start()
     {
-        gameObject.SetActive(false);
+        DontDestroyOnLoad(gameObject);
+        overlay.gameObject.SetActive(false);
     }
+
 
     private void OnDead()
     {
-        gameObject.SetActive(true);
+        overlay.gameObject.SetActive(true); 
+        Time.timeScale = 0;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void RestartButtonClicked()
     {
         SceneManager.LoadScene("Game");
+        Time.timeScale = 1;
     }
 
     public void TitleButtonClicked()
