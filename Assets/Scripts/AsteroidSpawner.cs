@@ -8,9 +8,9 @@ public class AsteroidSpawner : MonoBehaviour
     [SerializeField] private Asteroid asteroidPrefab;
     [SerializeField] private float timeBetweenSpawn;
 
-    private bool _spawning = false;
-    private float _time;
-    
+    private bool isSpawning = false;
+    private float spawnTimer;
+
     private void Start()
     {
         StartSpawning();
@@ -18,26 +18,32 @@ public class AsteroidSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (!_spawning)
+        if (target == null)
+        {
+            isSpawning = false;
+        }
+
+        if (!isSpawning)
             return;
-        if (_time >= timeBetweenSpawn)
+
+        if (spawnTimer >= timeBetweenSpawn)
         {
             Spawn();
-            _time = 0f;
+            spawnTimer = 0f;
         }
-        _time += Time.deltaTime;
+        spawnTimer += Time.deltaTime;
     }
 
     private void StartSpawning()
     {
-        _spawning = true;
+        isSpawning = true;
     }
 
     private Vector3 GetSpawnPoint()
     {
-        float randomX = Random.Range(-transform.lossyScale.x/2, transform.lossyScale.x/2);
-        float randomY = Random.Range(-transform.lossyScale.y/2, transform.lossyScale.y/2);
-        float randomZ = Random.Range(-transform.lossyScale.z/2, transform.lossyScale.z/2);
+        float randomX = Random.Range(-transform.lossyScale.x / 2, transform.lossyScale.x / 2);
+        float randomY = Random.Range(-transform.lossyScale.y / 2, transform.lossyScale.y / 2);
+        float randomZ = Random.Range(-transform.lossyScale.z / 2, transform.lossyScale.z / 2);
         return transform.position + new Vector3(randomX, randomY, randomZ);
     }
 
@@ -45,10 +51,10 @@ public class AsteroidSpawner : MonoBehaviour
     {
         // Instantiate the asteroid
         Asteroid asteroid = Instantiate(asteroidPrefab);
-        
+
         // Set a random spawn point based on the spawn area
         asteroid.transform.position = GetSpawnPoint();
-        
+
         // Set a random speed based on the direction to the target
         Vector3 directionToTarget = (target.position - asteroid.transform.position).normalized;
         Vector3 speed = directionToTarget * Random.Range(speedRange.x, speedRange.y);
