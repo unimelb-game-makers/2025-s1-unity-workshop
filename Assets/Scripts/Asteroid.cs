@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Asteroid : MonoBehaviour
@@ -5,6 +6,8 @@ public class Asteroid : MonoBehaviour
     private Rigidbody rb;
 
     private int health;
+
+    public static Action Destroyed;
 
     private void Awake()
     {
@@ -35,6 +38,7 @@ public class Asteroid : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
+            Destroyed?.Invoke();
             Destroy(gameObject);
         }
     }

@@ -13,6 +13,7 @@ public class Earth : MonoBehaviour
     private void Start()
     {
         health = maxHealth;
+        OnHealthChanged?.Invoke(maxHealth);
     }
 
     private void OnCollisionEnter(Collision collision)

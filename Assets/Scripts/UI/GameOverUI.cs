@@ -6,7 +6,7 @@ public class GameOverUI : MonoBehaviour
     [SerializeField]
     private GameObject overlay;
 
-    private void Start()
+    private void OnEnable()
     {
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += SceneChanged;
